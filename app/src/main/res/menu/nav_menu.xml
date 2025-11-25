@@ -1,0 +1,15 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/history"
+        android:icon="@drawable/historia"
+        android:title="" />
+
+    <item
+        android:id="@+id/create"
+        android:icon="@drawable/outline_add_box_24"
+        android:title="" />
+    <item
+        android:id="@+id/perfil"
+        android:icon="@drawable/outline_account_circle_24"
+        android:title="" />
+</menu>

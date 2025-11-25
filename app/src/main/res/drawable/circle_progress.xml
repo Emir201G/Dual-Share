@@ -1,0 +1,23 @@
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Fondo gris -->
+    <item android:id="@android:id/background">
+        <shape android:shape="ring"
+            android:thickness="8dp"
+            android:useLevel="false">
+            <solid android:color="#CCCCCC"/>
+        </shape>
+    </item>
+
+    <!-- Progreso (color) -->
+    <item android:id="@android:id/progress">
+        <clip>
+            <shape android:shape="ring"
+                android:thickness="8dp"
+                android:useLevel="true">
+                <solid android:color="#FF3B30"/> <!-- rojo tipo Instagram -->
+            </shape>
+        </clip>
+    </item>
+
+</layer-list>

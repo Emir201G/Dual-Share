@@ -26,21 +26,10 @@
             android:id="@+id/text_title_dual"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="DUAL"
-            android:fontFamily="@font/league_gothic_regular"
-            android:textSize="42sp"
-            android:textColor="@color/black"/>
-
-        <TextView
-            android:id="@+id/text_title_share"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="SHARE"
-            android:fontFamily="@font/league_gothic_regular"
-            android:textSize="72sp"
-            android:textColor="@color/white"
-
-            android:shadowColor="#55000000"
+            android:layout_marginTop="-30dp"
+            android:layout_marginBottom="30dp"
+            android:fontFamily="@font/pacifico_regular"
+            android:shadowColor="@color/white"
             android:shadowDx="0"
             android:shadowDy="3"
             android:shadowRadius="8"

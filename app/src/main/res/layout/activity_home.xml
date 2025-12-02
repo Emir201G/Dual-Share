@@ -26,10 +26,9 @@
         android:translationZ="20dp"
         app:itemActiveIndicatorStyle="@android:color/transparent"
         app:itemIconSize="30dp"
-        app:itemIconTint="@color/tab_icon_color"
         app:itemRippleColor="@color/white"
-        app:itemTextColor="@color/tab_text_color"
         app:labelVisibilityMode="unlabeled"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

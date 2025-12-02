@@ -2,34 +2,24 @@ pluginManagement {
     repositories {
         google {
             content {
-                includeGroupByRegex(
-                    "com\\.android.*"
-                )
-                includeGroupByRegex(
-                    "com\\.google.*"
-                )
-                includeGroupByRegex(
-                    "androidx.*"
-                )
+                includeGroupByRegex("com\\.android.*")
+                includeGroupByRegex("com\\.google.*")
+                includeGroupByRegex("androidx.*")
             }
         }
         mavenCentral()
         gradlePluginPortal()
     }
 }
+
 dependencyResolutionManagement {
-    repositoriesMode.set(
-        RepositoriesMode.FAIL_ON_PROJECT_REPOS
-    )
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
         google()
         mavenCentral()
-        maven { setUrl("https://jitpack.io/") }
+        maven { setUrl("https://jitpack.io") }
     }
 }
 
-rootProject.name =
-    "Dual Share"
-include(
-    ":app"
-)
+rootProject.name = "Dual Share"
+include(":app")

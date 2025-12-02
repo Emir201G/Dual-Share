@@ -1,29 +1,25 @@
 package com.emir201.dualshare.model;
 
+import android.net.Uri;
+
 public class CardItem {
 
-    public enum MediaType {
+    public enum Type {
+
         IMAGE,
-        VIDEO,
-        AUDIO,
+        VIDEO
     }
 
-    private MediaType type;
-    private String title;
+    private Type type;
     private String uri;
 
-    public CardItem(MediaType type, String title, String uri) {
+    public CardItem(Type type, String uri) {
         this.type = type;
-        this.title = title;
         this.uri = uri;
     }
 
-    public MediaType getType() {
+    public Type getType() {
         return type;
-    }
-
-    public String getTitle() {
-        return title;
     }
 
     public String getUri() {

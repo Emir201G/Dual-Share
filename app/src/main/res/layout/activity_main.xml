@@ -11,7 +11,7 @@
     <LinearLayout
         android:id="@+id/container"
         android:orientation="vertical"
-        android:gravity="center_horizontal"
+        android:gravity="center"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:padding="8dp"
@@ -20,45 +20,25 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
-        <!-- TÍTULO -->
-        <TextView
-            android:id="@+id/titleDual"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="DUAL"
-            android:textColor="@color/black"
-            android:fontFamily="@font/league_gothic_regular"
-            android:autoSizeTextType="uniform"
-            android:autoSizeMaxTextSize="130sp"
-            android:autoSizeMinTextSize="65sp"
-            android:autoSizeStepGranularity="2sp"
-            />
 
-        <!-- SUBTÍTULO -->
-        <TextView
-            android:id="@+id/titleShare"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="SHARE"
-            android:textColor="@color/white"
-            android:layout_marginTop="-10dp"
-            android:fontFamily="@font/league_gothic_regular"
-            android:autoSizeTextType="uniform"
-            android:autoSizeMaxTextSize="260sp"
-            android:autoSizeMinTextSize="100sp"
-            android:shadowColor="#55000000"
-            android:shadowDx="0"
-            android:shadowDy="3"
-            android:shadowRadius="8"
-            android:elevation="8dp"
-            android:autoSizeStepGranularity="2sp"
-            />
+
 
         <!-- LOGO -->
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Dual Share"
+            android:textSize="60dp"
+            android:textColor="@color/black"
+            android:fontFamily="@font/stack_sans_notch_medium"
+            android:layout_marginTop="-100dp"
+            android:gravity="center"/>
+
         <ImageView
             android:id="@+id/logoImage"
-            android:layout_width="300dp"
-            android:layout_height="300dp"
+            android:layout_width="400dp"
+            android:layout_height="400dp"
             android:layout_marginTop="12dp"
             android:adjustViewBounds="true"
             app:srcCompat="@drawable/logo_dual_share"/>
@@ -77,18 +57,7 @@
             android:textColor="@android:color/black"
             android:textAllCaps="false"/>
 
-        <!-- BOTÓN FACEBOOK -->
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btnFacebook"
-            android:layout_width="300dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="12dp"
-            android:background="@drawable/background_button_facebook"
-            android:drawableLeft="@drawable/facebook"
-            android:drawablePadding="12dp"
-            android:text="Continuar con Facebook"
-            android:textColor="@android:color/white"
-            android:textAllCaps="false"/>
+
 
     </LinearLayout>
 

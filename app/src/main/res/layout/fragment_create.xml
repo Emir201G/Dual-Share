@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white">
+    android:background="@color/black">
 
     <TextView
         android:id="@+id/textView"
@@ -12,9 +12,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="36dp"
         android:layout_marginEnd="120dp"
-        android:fontFamily="@font/pacifico_regular"
+        android:fontFamily="@font/stack_sans_notch_medium"
         android:text="Dual Share"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         android:textSize="40sp"
         app:layout_constraintEnd_toStartOf="@id/imgProfile"
         app:layout_constraintHorizontal_chainStyle="packed"
@@ -37,138 +37,20 @@
         app:layout_constraintStart_toEndOf="@id/textView"
         app:layout_constraintTop_toTopOf="@id/textView" />
 
-
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/cardCamera"
-        android:layout_width="156dp"
-        android:layout_height="103dp"
-        android:layout_marginTop="120dp"
-        android:layout_marginEnd="50dp"
-        android:backgroundTint="@color/ultra_ligth_gray"
-        android:clickable="true"
-        android:focusable="true"
-        app:cardCornerRadius="16dp"
-        app:cardElevation="4dp"
-        app:layout_constraintEnd_toStartOf="@+id/cardVideo"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:paddingHorizontal="16dp">
-
-            <ImageView
-                android:id="@+id/cardIconPhoto"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:scaleType="fitCenter"
-                android:src="@drawable/camara_icon"
-                tools:ignore="ContentDescription" />
-
-            <TextView
-                android:id="@+id/cardTextPhoto"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="12dp"
-                android:text="Foto"
-                android:textColor="@color/black"
-                android:textSize="16sp" />
-
-        </LinearLayout>
-
-    </com.google.android.material.card.MaterialCardView>
-
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/cardVideo"
-        android:layout_width="156dp"
-        android:layout_height="103dp"
-        android:layout_marginTop="120dp"
-        android:backgroundTint="@color/ultra_ligth_gray"
-        android:clickable="true"
-        android:focusable="true"
-        app:cardCornerRadius="16dp"
-        app:cardElevation="4dp"
+    <ImageButton
+        android:id="@+id/imageButtonDual"
+        android:layout_width="350dp"
+        android:layout_height="371dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="227dp"
+        android:background="@android:color/transparent"
+        android:layout_marginEnd="31dp"
+        android:layout_marginBottom="203dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/cardCamera"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:paddingHorizontal="16dp">
-
-            <ImageView
-                android:id="@+id/cardIconVideo"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:scaleType="fitCenter"
-                android:src="@drawable/video" />
-
-            <TextView
-                android:id="@+id/cardTextVideo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="12dp"
-                android:text="Video"
-                android:textColor="@color/black"
-                android:textSize="16sp" />
-
-        </LinearLayout>
-    </com.google.android.material.card.MaterialCardView>
-
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/cardRecorder"
-        android:layout_width="156dp"
-        android:layout_height="103dp"
-        android:layout_marginTop="44dp"
-        android:layout_marginEnd="50dp"
-        android:backgroundTint="@color/ultra_ligth_gray"
-        android:clickable="true"
-        android:focusable="true"
-        app:cardCornerRadius="16dp"
-        app:cardElevation="4dp"
-        app:layout_constraintEnd_toStartOf="@+id/materialCardView"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardCamera">
+        app:layout_constraintTop_toBottomOf="@+id/imgProfile"
+        app:srcCompat="@drawable/icon_principal" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:paddingHorizontal="16dp">
 
-            <ImageView
-                android:id="@+id/cardIconRecorder"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:scaleType="fitCenter"
-                android:src="@drawable/microfono" />
-
-            <TextView
-                android:id="@+id/cardTextRecorder"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="12dp"
-                android:text="REC"
-                android:textColor="@color/black"
-                android:textSize="16sp" />
-
-        </LinearLayout>
-    </com.google.android.material.card.MaterialCardView>
-
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/materialCardView"
-        android:layout_width="156dp"
-        android:layout_height="103dp"
-        android:layout_marginTop="45dp"
-        android:visibility="invisible"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/cardRecorder"
-        app:layout_constraintTop_toBottomOf="@+id/cardVideo" />
 </androidx.constraintlayout.widget.ConstraintLayout>

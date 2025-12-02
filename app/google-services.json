@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "722565797297",
+    "project_id": "dual-share-29d05",
+    "storage_bucket": "dual-share-29d05.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:722565797297:android:0afd40b3eda4187de51990",
+        "android_client_info": {
+          "package_name": "com.emir201.dualshare"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "722565797297-5qcmok2llcl6it57npgf3q1s3o890c6k.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.emir201.dualshare",
+            "certificate_hash": "5a72ee7c425c4de0a268638d8ed6d6bfd41ff5f7"
+          }
+        },
+        {
+          "client_id": "722565797297-g6mhmuqtgjjps275f62im3q4oe9p92ol.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBmn4QnlYviaHK77oTZGng3Lj0SEsWWUw4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "722565797297-g6mhmuqtgjjps275f62im3q4oe9p92ol.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

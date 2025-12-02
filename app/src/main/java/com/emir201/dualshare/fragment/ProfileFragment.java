@@ -39,44 +39,13 @@ public class ProfileFragment extends Fragment {
         // Referencias
         circleImageView= view.findViewById(R.id.imgProfile);
         textView = view.findViewById(R.id.tvName);
-        imageButtonText = view.findViewById(R.id.imageButtonText);
-        imageButtonImg = view.findViewById(R.id.imageButtonImg);
+
         // Cambiar nombre al presionar el TextView
-        imageButtonText.setOnClickListener(v -> {
-            final EditText input = new EditText(getContext());
-            input.setHint("Escribe tu nuevo nombre");
 
-            new AlertDialog.Builder(getContext())
-                    .setTitle("Cambiar nombre")
-                    .setView(input)
-                    .setPositiveButton("Guardar", (dialog, which) -> {
-                        String nuevoNombre = input.getText().toString().trim();
-                        if (!nuevoNombre.isEmpty()) {
-                            textView.setText(nuevoNombre);
-                        }
-                    })
-                    .setNegativeButton("Cancelar", null)
-                    .show();
-        });
-
-        // Cambiar imagen al presionar el CircleImageView
-        imageButtonImg.setOnClickListener(v -> {
-            Intent intent = new Intent(Intent.ACTION_PICK);
-            intent.setType("image/*");
-            startActivityForResult(intent, PICK_IMAGE_REQUEST);
-        });
 
         return view;
     }
 
     // Recibir resultado de la galería
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode == PICK_IMAGE_REQUEST && resultCode == Activity.RESULT_OK && data != null) {
-            Uri imageUri = data.getData();
-            circleImageView.setImageURI(imageUri);
-        }
-    }
 }

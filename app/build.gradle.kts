@@ -1,6 +1,8 @@
 plugins {
     id("com.android.application")
+    id("com.google.gms.google-services")
 }
+
 
 android {
     namespace =
@@ -51,6 +53,8 @@ android {
 }
 
 dependencies {
+
+    // Librerías del catálogo (normal)
     implementation(
         libs.appcompat
     )
@@ -69,12 +73,6 @@ dependencies {
     implementation(
         libs.cardview
     )
-    implementation(
-        libs.media3.exoplayer
-    )
-    implementation(
-        libs.media3.ui
-    )
 
     testImplementation(
         libs.junit
@@ -86,6 +84,7 @@ dependencies {
         libs.espresso.core
     )
 
+    // UI
     implementation(
         "com.airbnb.android:lottie:6.1.0"
     )
@@ -103,9 +102,6 @@ dependencies {
     )
     implementation(
         "androidx.viewpager2:viewpager2:1.1.0"
-    )
-    implementation(
-        "com.google.android.material:material:1.12.0"
     )
 
     // CameraX
@@ -126,26 +122,46 @@ dependencies {
     implementation(
         "androidx.camera:camera-extensions:$cameraxVersion"
     )
-
     implementation(
-        "androidx.camera:camera-video:${cameraxVersion}"
+        "androidx.camera:camera-video:$cameraxVersion"
     )
 
-    // 👇 Esta es la del Card Swipe
+    // Card Swipe
     implementation(
-        "com.github.yuyakaido:CardStackView:v2.3.4"
-    )
-    implementation(
-        "com.github.bumptech.glide:glide:4.13.2"
-    )
-    implementation(
-        "androidx.camera:camera-extensions:${cameraxVersion}"
+        "com.github.yuyakaido:CardStackView:2.3.4"
     )
 
-    //Yuyakaido CardStackView
+    // ExoPlayer
     implementation(
-        "com.yuyakaido.android:card-stack-view:2.3.4"
+        "com.google.android.exoplayer:exoplayer:2.19.1"
+    )
+    implementation(
+        "com.google.android.exoplayer:exoplayer-ui:2.19.1"
     )
 
+    // 🔥 Firebase (BOM recomendado)
+    implementation(
+        platform(
+            "com.google.firebase:firebase-bom:33.1.2"
+        )
+    )
 
+    // Firebase Auth
+    implementation(
+        "com.google.firebase:firebase-auth"
+    )
+
+    // Firebase Storage
+    implementation(
+        "com.google.firebase:firebase-storage"
+    )
+
+    // 🔥 Facebook Login
+    implementation(
+        "com.facebook.android:facebook-login:latest.release"
+    )
+    // 🔥 Google Sign-In
+    implementation(
+        "com.google.android.gms:play-services-auth:20.7.0"
+    )
 }

@@ -16,17 +16,14 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.bumptech.glide.Glide;
 import com.emir201.dualshare.R;
 
 import de.hdodenhof.circleimageview.CircleImageView;
-
 public class ProfileFragment extends Fragment {
 
     private TextView textView;
     private CircleImageView circleImageView;
-
-    private ImageButton imageButtonText,imageButtonImg;
-    private static final int PICK_IMAGE_REQUEST = 100;
 
     @Nullable
     @Override
@@ -36,16 +33,27 @@ public class ProfileFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
 
-        // Referencias
-        circleImageView= view.findViewById(R.id.imgProfile);
+        circleImageView = view.findViewById(R.id.imgProfile);
         textView = view.findViewById(R.id.tvName);
 
-        // Cambiar nombre al presionar el TextView
+        Intent intent = getActivity().getIntent();
 
+        String name = intent.getStringExtra("name");
+        Uri photo = intent.getParcelableExtra("photo");
+
+        textView.setText(name);
+
+        updateImagen(photo, circleImageView);
 
         return view;
     }
 
-    // Recibir resultado de la galería
-
+    private void updateImagen(Uri uri, CircleImageView circleImageView) {
+        if (uri != null) {
+            Glide.with(circleImageView.getContext())
+                    .load(uri)
+                    .into(circleImageView);
+        }
+    }
 }
+

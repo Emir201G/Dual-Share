@@ -16,13 +16,14 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.button.MaterialButton;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.GoogleAuthProvider;
 
 public class MainActivity extends AppCompatActivity {
 
-    private AppCompatButton btnGoogle;
+    private MaterialButton btnGoogle;
     private GoogleSignInClient googleClient;
     private FirebaseAuth firebaseAuth;
 
@@ -77,24 +78,34 @@ public class MainActivity extends AppCompatActivity {
 
             String name = account.getDisplayName();
             Uri photo = account.getPhotoUrl();
+            String gmail = account.getEmail();
             String token = account.getIdToken();
 
-            // 👉 Pasamos los datos a HomeActivity
+            // 1. Preparamos los Intents fuera del bloque asíncrono
             Intent intentHome = new Intent(MainActivity.this, HomeActivity.class);
             intentHome.putExtra("name", name);
+            intentHome.putExtra("email", gmail);
             intentHome.putExtra("photo", photo);
-            startActivity(intentHome);   // ✔ SOLO este intent
 
-            // Firebase
+            // 2. Iniciamos el proceso de autenticación de Firebase
             AuthCredential credential = GoogleAuthProvider.getCredential(token, null);
 
             firebaseAuth.signInWithCredential(credential)
                     .addOnSuccessListener(authResult -> {
+                        // 3. SOLO SI EL LOGIN CON FIREBASE ES EXITOSO, LANZAMOS LAS ACTIVITIES
                         Toast.makeText(this, "Login correcto!", Toast.LENGTH_SHORT).show();
+
+                        // 👉 LANZAMOS LAS ACTIVITIES AQUÍ:
+
+                        startActivity(intentHome);
+                        finish(); // Cerrar MainActivity
                     })
                     .addOnFailureListener(e -> {
+                        // 4. Si falla la autenticación de Firebase, mostramos el error y no lanzamos las activities
                         Toast.makeText(this, "Error Firebase: " + e.getMessage(), Toast.LENGTH_LONG).show();
                     });
+
+            // ⚠️ Eliminamos las llamadas a startActivity() y finish() de aquí.
 
         } catch (Exception e) {
             Toast.makeText(this, "Fallo: " + e.getMessage(), Toast.LENGTH_LONG).show();

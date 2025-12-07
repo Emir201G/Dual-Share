@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black">
+    android:background="@color/white">
 
     <TextView
         android:id="@+id/textView"
@@ -14,7 +14,7 @@
         android:layout_marginEnd="120dp"
         android:fontFamily="@font/stack_sans_notch_medium"
         android:text="Dual Share"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         android:textSize="40sp"
         app:layout_constraintEnd_toStartOf="@id/imgProfile"
         app:layout_constraintHorizontal_chainStyle="packed"
@@ -37,20 +37,50 @@
         app:layout_constraintStart_toEndOf="@id/textView"
         app:layout_constraintTop_toTopOf="@id/textView" />
 
-    <ImageButton
-        android:id="@+id/imageButtonDual"
-        android:layout_width="350dp"
-        android:layout_height="371dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="227dp"
-        android:background="@android:color/transparent"
-        android:layout_marginEnd="31dp"
-        android:layout_marginBottom="203dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnShareCode"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="40dp"
+        android:text="Compartir Código"
+        android:textSize="16sp"
+        app:backgroundTint="@color/black"
+        app:cornerRadius="12dp"
+        app:icon="@drawable/code_branch"
+        app:iconGravity="textStart"
+        app:iconTint="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imgProfile"
-        app:srcCompat="@drawable/icon_principal" />
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <FrameLayout
+        android:id="@+id/containerPulse"
+        android:layout_width="350dp"
+        android:layout_height="350dp"
+        android:layout_marginTop="180dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/imgProfile">
+
+        <View
+            android:id="@+id/pulseView"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_gravity="center"
+            android:background="@drawable/pulse_circle" />
+
+        <ImageButton
+            android:id="@+id/imageButtonDual"
+            android:layout_width="300dp"
+            android:layout_height="300dp"
+            android:layout_gravity="center"
+            android:background="@android:color/transparent"
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/icon_background_black" />
+
+    </FrameLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

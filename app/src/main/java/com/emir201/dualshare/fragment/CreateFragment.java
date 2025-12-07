@@ -1,8 +1,5 @@
 package com.emir201.dualshare.fragment;
 
-
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.content.Intent;
@@ -10,7 +7,9 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.ImageButton;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -18,62 +17,53 @@ import androidx.fragment.app.Fragment;
 
 import com.emir201.dualshare.CameraActivity;
 import com.emir201.dualshare.R;
-import com.emir201.dualshare.VoiceRecorderActivity;
-import com.google.android.material.card.MaterialCardView;
-
-import android.os.Build; // Importar Build
-import android.view.View; // Importar View
-import android.widget.ImageButton;
-// ... (otras importaciones)
+import com.emir201.dualshare.ShareActivity;
+import com.google.android.material.button.MaterialButton;
 
 public class CreateFragment extends Fragment {
 
     private ImageButton buttonDual;
+    private MaterialButton btnShareCode;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
+
         View view = inflater.inflate(R.layout.fragment_create, container, false);
 
-        Window window = requireActivity().getWindow();
+        // PULSE ANIMATION (estilo Shazam)
+        View pulse = view.findViewById(R.id.pulseView);
 
-        window.setNavigationBarColor(getResources().getColor(R.color.black));
-        window.setStatusBarColor(getResources().getColor(R.color.black));
+        Animation animation = AnimationUtils.loadAnimation(requireContext(), R.anim.pulse);
+        pulse.startAnimation(animation);
 
+        // Referencias
         buttonDual = view.findViewById(R.id.imageButtonDual);
+        btnShareCode = view.findViewById(R.id.btnShareCode);
 
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            int currentFlags = window.getDecorView().getSystemUiVisibility();
-            currentFlags &= ~View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR;
-            window.getDecorView().setSystemUiVisibility(currentFlags);
-        }
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            int currentNavFlags = window.getDecorView().getSystemUiVisibility();
-            currentNavFlags &= ~View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR;
-            window.getDecorView().setSystemUiVisibility(currentNavFlags);
-        }
-
-        float[] scaleValues = {1.0f, 0.9f, 1.1f, 1.0f};
-        ObjectAnimator scaleX = ObjectAnimator.ofFloat(buttonDual, "scaleX", scaleValues);
-        scaleX.setDuration(500);
-        ObjectAnimator scaleY = ObjectAnimator.ofFloat(buttonDual, "scaleY", scaleValues);
-        scaleX.setDuration(500);
-
-
-        AnimatorSet animatorSet = new AnimatorSet();
-        animatorSet.playTogether(scaleX, scaleY);
-        animatorSet.addListener(new AnimatorListenerAdapter() {
-            public void onAnimationEnd(Animator animation) {
-                super.onAnimationEnd(animation);
-                animatorSet.start();
-            }
+        // Abrir actividad para compartir código
+        btnShareCode.setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), ShareActivity.class);
+            startActivity(intent);
         });
 
-        animatorSet.start();
+        // Efecto shrink + rebound cuando se presiona
+        buttonDual.setOnClickListener(v -> {
+            v.animate()
+                    .scaleX(0.85f)
+                    .scaleY(0.85f)
+                    .setDuration(100)
+                    .withEndAction(() ->
+                            v.animate()
+                                    .scaleX(1f)
+                                    .scaleY(1f)
+                                    .setDuration(150)
+                    )
+                    .start();
+        });
+
         return view;
     }
 }

@@ -17,13 +17,17 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
+import com.emir201.dualshare.EditProfileActivity;
 import com.emir201.dualshare.R;
+import com.google.android.material.button.MaterialButton;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+
 public class ProfileFragment extends Fragment {
 
     private TextView textView;
     private CircleImageView circleImageView;
+    private MaterialButton btnEditProfile, btnFriends;
 
     @Nullable
     @Override
@@ -35,15 +39,27 @@ public class ProfileFragment extends Fragment {
 
         circleImageView = view.findViewById(R.id.imgProfile);
         textView = view.findViewById(R.id.tvName);
+        btnEditProfile = view.findViewById(R.id.btnEditProfile);
+
+
 
         Intent intent = getActivity().getIntent();
 
         String name = intent.getStringExtra("name");
         Uri photo = intent.getParcelableExtra("photo");
-
+        String email = intent.getStringExtra("email");
         textView.setText(name);
 
         updateImagen(photo, circleImageView);
+
+        btnEditProfile.setOnClickListener(v -> {
+            Intent intentEdit = new Intent(getActivity(), EditProfileActivity.class);
+            intentEdit.putExtra("email", email);
+            intentEdit.putExtra("photo", photo);
+            intentEdit.putExtra("name", name);
+            startActivity(intentEdit);
+
+        });
 
         return view;
     }

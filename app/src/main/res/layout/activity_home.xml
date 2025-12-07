@@ -26,9 +26,8 @@
         android:translationZ="20dp"
         app:itemActiveIndicatorStyle="@android:color/transparent"
         app:itemIconSize="30dp"
-        app:itemRippleColor="@color/white"
+        app:itemRippleColor="@color/ultra_ligth_gray"
         app:labelVisibilityMode="unlabeled"
-
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

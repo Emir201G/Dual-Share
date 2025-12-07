@@ -20,17 +20,19 @@
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/imgProfile"
-            android:layout_width="200dp"
-            android:layout_height="200dp"
-            android:src="@drawable/dog" />
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:scaleType="centerCrop"
+            app:civ_border_color="@color/black"
+            app:civ_border_width="2dp" />
 
         <TextView
-            android:id="@+id/tvNameUser"
+            android:id="@+id/txtNameUser"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:fontFamily="@font/quicksand_bold"
-            android:text="Marcelo Guanactolay"
+            android:text=""
             android:textColor="@color/black"
             android:textSize="20dp" />
 
@@ -38,14 +40,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
+
             <TextView
                 android:id="@+id/txtGmail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/quicksand_bold"
-                android:text="mguanactola18@gmail.com"
+                android:text=""
                 android:textColor="@color/medium_gray"
-                android:textSize="18dp" />
+                android:textSize="15dp" />
 
         </LinearLayout>
     </LinearLayout>
@@ -75,6 +78,7 @@
                 android:id="@+id/btnName"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
+
                 android:layout_marginBottom="16dp"
                 android:background="@android:color/transparent"
                 android:drawableRight="@drawable/arrow"
@@ -85,7 +89,7 @@
                 android:textColor="@android:color/black" />
 
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btnGoogle"
+                android:id="@+id/btnPhoto"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginBottom="16dp"
@@ -98,7 +102,7 @@
                 android:textColor="@android:color/black" />
 
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btnPhotoProfile"
+                android:id="@+id/btnLogOut"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:background="@android:color/transparent"
@@ -113,18 +117,47 @@
 
     </com.google.android.material.card.MaterialCardView>
 
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Dual Share"
-        android:fontFamily="@font/stack_sans_notch_medium"
-        android:textSize="40dp"
-        android:textColor="@color/black"
+    <LinearLayout
+        android:id="@+id/header"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:gravity="center"
+        android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/materialCardView" />
+        app:layout_constraintTop_toBottomOf="@+id/materialCardView"
+        app:layout_constraintVertical_bias="0.799">
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/icon_background_black" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:fontFamily="@font/stack_sans_notch_medium"
+            android:text="Dual Share"
+            android:textColor="@color/black"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+    <ImageButton
+        android:id="@+id/imageButton"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="40dp"
+        android:background="@android:color/transparent"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
+        app:layout_constraintEnd_toStartOf="@+id/linearLayout2"
+        app:layout_constraintHorizontal_bias="0.198"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.571"
+        app:srcCompat="@drawable/back" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

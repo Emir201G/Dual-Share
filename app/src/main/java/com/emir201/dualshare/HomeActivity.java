@@ -38,8 +38,6 @@ public class HomeActivity extends AppCompatActivity {
             int itemId = item.getItemId();
             if (itemId == R.id.create) {
                 selectedFragment = new CreateFragment();
-                bottomNavigationView.setBackgroundColor(getColor(R.color.black));
-                window.getDecorView().setSystemUiVisibility(window.getDecorView().getSystemUiVisibility() | View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR);
 
 
             } else if (itemId == R.id.history) {

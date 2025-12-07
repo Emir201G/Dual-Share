@@ -31,7 +31,7 @@
         android:layout_marginStart="12dp"
         android:layout_marginTop="4dp"
         android:scaleType="centerCrop"
-        android:src="@drawable/dog"
+        android:src="@drawable/icon_background_black"
         app:civ_border_color="@color/white"
         app:civ_border_width="3dp"
         app:layout_constraintBottom_toBottomOf="@id/textView"

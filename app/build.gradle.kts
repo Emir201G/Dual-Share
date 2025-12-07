@@ -170,5 +170,5 @@ dependencies {
     annotationProcessor(
         "com.github.bumptech.glide:compiler:4.15.1"
     )
-
+    implementation("com.google.android.material:material:1.11.0")
 }

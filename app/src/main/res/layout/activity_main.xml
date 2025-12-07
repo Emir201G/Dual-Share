@@ -1,63 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/ultra_ligth_gray"
-    android:padding="16dp">
+    android:background="@color/ultra_ligth_gray">
 
-    <!-- CONTENEDOR PRINCIPAL: TODO CENTRADO Y DISTRIBUIDO -->
     <LinearLayout
-        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         android:gravity="center"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:padding="8dp"
+        android:padding="24dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
-
-
-
-        <!-- LOGO -->
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="match_parent"
+        <!-- LOGO + TÍTULO -->
+        <LinearLayout
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Dual Share"
-            android:textSize="60dp"
-            android:textColor="@color/black"
-            android:fontFamily="@font/stack_sans_notch_medium"
-            android:layout_marginTop="-100dp"
-            android:gravity="center"/>
+            android:orientation="horizontal"
+            android:gravity="center">
 
-        <ImageView
-            android:id="@+id/logoImage"
-            android:layout_width="400dp"
-            android:layout_height="400dp"
-            android:layout_marginTop="12dp"
-            android:adjustViewBounds="true"
-            app:srcCompat="@drawable/logo_dual_share"/>
+            <ImageView
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/icon_background_black"
+                android:contentDescription="@string/app_name" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Dual Share"
+                android:textColor="@color/black"
+                android:fontFamily="@font/stack_sans_notch_medium"
+                android:textSize="40sp"
+                android:paddingStart="12dp" />
+        </LinearLayout>
+
+        <!-- ESPACIO RESPONSIVO -->
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="48dp" />
 
         <!-- BOTÓN GOOGLE -->
-        <androidx.appcompat.widget.AppCompatButton
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/btnGoogle"
-            android:layout_width="300dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="24dp"
-            android:background="@drawable/button_shadow"
-            android:drawableLeft="@drawable/google"
-            android:drawablePadding="12dp"
-            android:textAlignment="gravity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:text="Continuar con Google"
-            android:textColor="@android:color/black"
-            android:textAllCaps="false"/>
-
-
+            android:textSize="18sp"
+            android:textColor="@color/black"
+            android:backgroundTint="@color/white"
+            app:cornerRadius="50dp"
+            app:icon="@drawable/google"
+            app:iconGravity="textStart"
+            app:iconPadding="12dp"
+            app:iconTint="@null"
+            app:rippleColor="@color/ultra_ligth_gray"
+            android:elevation="8dp" />
 
     </LinearLayout>
 

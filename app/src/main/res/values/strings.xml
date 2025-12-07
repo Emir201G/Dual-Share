@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Dual Share</string>
+
+    <string name="default_web_client_id">
+    722565797297-g6mhmuqtgjjps275f62im3q4oe9p92ol.apps.googleusercontent.com
+</string>
+
 </resources>

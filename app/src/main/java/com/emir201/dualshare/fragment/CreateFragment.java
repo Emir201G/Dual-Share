@@ -49,18 +49,24 @@ public class CreateFragment extends Fragment {
             startActivity(intent);
         });
 
-        // Efecto shrink + rebound cuando se presiona
         buttonDual.setOnClickListener(v -> {
+
+            // Animación
             v.animate()
                     .scaleX(0.85f)
                     .scaleY(0.85f)
                     .setDuration(100)
-                    .withEndAction(() ->
-                            v.animate()
-                                    .scaleX(1f)
-                                    .scaleY(1f)
-                                    .setDuration(150)
-                    )
+                    .withEndAction(() -> {
+                        v.animate()
+                                .scaleX(1f)
+                                .scaleY(1f)
+                                .setDuration(150)
+                                .start();
+
+                        // Abrir actividad después de la animación
+                        Intent intent = new Intent(getActivity(), CameraActivity.class);
+                        startActivity(intent);
+                    })
                     .start();
         });
 

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -9,44 +8,83 @@
 
 
     <!-- 🟣 IMAGEN DE PERFIL A LA DERECHA DEL TEXTO -->
+
+
     <TextView
         android:id="@+id/textView"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
-        android:layout_marginEnd="120dp"
+        android:layout_marginTop="28dp"
+        android:textAlignment="center"
         android:fontFamily="@font/stack_sans_notch_medium"
         android:text="Dual Share"
         android:textColor="@color/black"
         android:textSize="40sp"
-        app:layout_constraintEnd_toStartOf="@id/imgProfile"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/imgProfile"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="4dp"
-        android:scaleType="centerCrop"
-        android:src="@drawable/icon_background_black"
-        app:civ_border_color="@color/white"
-        app:civ_border_width="3dp"
-        app:layout_constraintBottom_toBottomOf="@id/textView"
+    <com.airbnb.lottie.LottieAnimationView
+        id="@+id/lottieAnimationViewGhosty"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/textView"
-        app:layout_constraintTop_toTopOf="@id/textView" />
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintVertical_bias="1.0"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_rawRes="@raw/ghosty" />
+
+    <LinearLayout
+        android:id="@+id/layoutNoFriends"
+        android:layout_width="match_parent"
+        android:layout_height="640dp"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="No Friends" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layoutNoStories"
+        android:layout_width="match_parent"
+        android:layout_height="640dp"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="No Stories" />
+    </LinearLayout>
 
     <com.yuyakaido.android.cardstackview.CardStackView
-        android:id="@+id/cardStackView"
+        android:id="@+id/cardStackViewHistory"
         android:layout_width="match_parent"
         android:layout_height="650dp"
         android:layout_marginTop="100dp"
-        app:layout_constraintBottom_toBottomOf="parent"
         android:background="@android:color/transparent"
         android:elevation="8dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

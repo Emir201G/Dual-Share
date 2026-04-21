@@ -1,6 +1,5 @@
 package com.emir201.dualshare;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -10,6 +9,8 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 
@@ -20,6 +21,10 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -30,6 +35,7 @@ public class EditProfileActivity extends AppCompatActivity {
     private CircleImageView imgProfile;
     private FirebaseAuth firebaseAuth;
     private GoogleSignInClient googleClient;
+    private Uri imageUri;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,7 +71,7 @@ public class EditProfileActivity extends AppCompatActivity {
             Glide.with(this).load(receivedPhoto).into(imgProfile);
         }
 
-        // Animación del botón
+        // Animaciones
         applyTouchAnimation(btnName);
         applyTouchAnimation(btnPhotoProfile);
         applyTouchAnimation(btnLogOut);
@@ -79,13 +85,14 @@ public class EditProfileActivity extends AppCompatActivity {
             bottomSheetDialog.show();
         });
 
-        // ⚠️ BOTÓN CORRECTO PARA CERRAR SESIÓN
+        // Cerrar sesión
         btnLogOut.setOnClickListener(view -> showLogoutDialog());
+
+        // Cambiar la foto de perfil
+        btnPhotoProfile.setOnClickListener(v -> pickImageLauncher.launch("image/*"));
     }
 
-    // -----------------------------
-    // ❗ DIÁLOGO DE CONFIRMACIÓN
-    // -----------------------------
+    // Diálogo para confirmar logout
     private void showLogoutDialog() {
         new MaterialAlertDialogBuilder(this)
                 .setTitle("Cerrar sesión")
@@ -98,31 +105,24 @@ public class EditProfileActivity extends AppCompatActivity {
                 .show();
     }
 
-    // -----------------------------
-    // ❗ FUNCIÓN REAL DE LOGOUT
-    // -----------------------------
+    // Logout real Google + Firebase
     private void logout() {
         firebaseAuth.signOut();
         googleClient.signOut().addOnCompleteListener(task -> {
-
             Intent intent = new Intent(EditProfileActivity.this, MainActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
             finish();
-
         });
     }
 
-    // -----------------------------
-    // Animación para botones
-    // -----------------------------
+    // Animación
     private void applyTouchAnimation(View v) {
         v.setOnTouchListener((view, event) -> {
             switch (event.getAction()) {
                 case MotionEvent.ACTION_DOWN:
                     view.animate().scaleX(0.90f).scaleY(0.90f).setDuration(80).start();
                     break;
-
                 case MotionEvent.ACTION_UP:
                 case MotionEvent.ACTION_CANCEL:
                     view.animate().scaleX(1f).scaleY(1f).setDuration(80).start();
@@ -130,5 +130,52 @@ public class EditProfileActivity extends AppCompatActivity {
             }
             return false;
         });
+    }
+
+    // Lanzador de galería
+    private ActivityResultLauncher<String> pickImageLauncher =
+            registerForActivityResult(new ActivityResultContracts.GetContent(), uri -> {
+                if (uri != null) {
+                    imageUri = uri;
+                    imgProfile.setImageURI(uri);
+                    uploadImageToFirebase(uri);
+                }
+            });
+
+    // ✔ CORREGIDO: subir imagen a Firebase Storage
+    private void uploadImageToFirebase(Uri uri) {
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+        if (user == null) {
+            Toast.makeText(this, "No hay usuario logueado", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        StorageReference storageRef = FirebaseStorage.getInstance()
+                .getReference("profile_images/" + user.getUid() + ".jpg");
+
+        storageRef.putFile(uri)
+                .addOnSuccessListener(taskSnapshot ->
+                        storageRef.getDownloadUrl().addOnSuccessListener(this::updateUserPhoto))
+                .addOnFailureListener(e ->
+                        Toast.makeText(this, "Error al subir imagen", Toast.LENGTH_SHORT).show());
+    }
+
+    // Actualizar foto de perfil en FirebaseAuth
+    private void updateUserPhoto(Uri downloadUri) {
+
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user == null) return;
+
+        UserProfileChangeRequest profileUpdates =
+                new UserProfileChangeRequest.Builder()
+                        .setPhotoUri(downloadUri)
+                        .build();
+
+        user.updateProfile(profileUpdates)
+                .addOnSuccessListener(aVoid ->
+                        Toast.makeText(this, "Foto actualizada", Toast.LENGTH_SHORT).show())
+                .addOnFailureListener(e ->
+                        Toast.makeText(this, "Error al actualizar perfil", Toast.LENGTH_SHORT).show());
     }
 }

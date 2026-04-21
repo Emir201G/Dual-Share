@@ -1,35 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <!-- PREVIEW IMAGEN -->
     <ImageView
         android:id="@+id/imagenPreview"
-        android:layout_width="406dp"
+        android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="106dp"
-        android:layout_marginBottom="57dp"
-        android:adjustViewBounds="true"
-        android:background="@color/white"
+        android:layout_margin="16dp"
         android:scaleType="fitCenter"
-        app:layout_constraintBottom_toTopOf="@+id/button2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        android:visibility="gone"
+        android:adjustViewBounds="true"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.431" />
-
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="34dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/buttonDelete"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imagenPreview"
-        android:textColor="@color/white"
-        android:text="Delete" />
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+
+    <!-- PREVIEW VIDEO -->
+    <androidx.media3.ui.PlayerView
+        android:id="@+id/videoPreview"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:visibility="gone"
+        app:use_controller="true"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/buttonDelete"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+
+    <!-- BOTON DELETE -->
+    <ImageButton
+        android:id="@+id/buttonDelete"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginBottom="24dp"
+        android:backgroundTint="@android:color/transparent"
+        android:scaleType="centerInside"
+        android:src="@drawable/delete"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+
+    <!-- BOTON SEND -->
+    <ImageButton
+        android:id="@+id/buttonSend"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="24dp"
+        android:backgroundTint="@android:color/transparent"
+        android:scaleType="centerInside"
+        android:src="@drawable/enviar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

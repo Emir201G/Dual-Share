@@ -7,18 +7,20 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.PorterDuff;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
 import android.os.Looper;
 import android.provider.MediaStore;
 import android.view.ScaleGestureDetector;
+import android.view.View;
 import android.view.Window;
+import android.view.WindowInsets;
+import android.view.WindowInsetsController;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.camera.core.CameraControl;
@@ -38,9 +40,7 @@ import androidx.camera.video.VideoRecordEvent;
 import androidx.camera.view.PreviewView;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-
 import com.google.common.util.concurrent.ListenableFuture;
-
 import java.io.File;
 import java.util.concurrent.ExecutionException;
 
@@ -72,6 +72,8 @@ public class CameraActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_camera);
+        hideSystemUI();
+
 
         previewView = findViewById(R.id.previewView);
         btnCapture = findViewById(R.id.btnCapture);
@@ -81,7 +83,7 @@ public class CameraActivity extends AppCompatActivity {
         progressTimer = findViewById(R.id.progress_timer);
 
 
-        Window window= getWindow();
+        Window window = getWindow();
         window.setStatusBarColor(getColor(R.color.black));
         window.setNavigationBarColor(getColor(R.color.black));
 
@@ -129,6 +131,29 @@ public class CameraActivity extends AppCompatActivity {
         btnFlash.setOnClickListener(v -> toggleFlash());
 
         btnVideo.setOnClickListener(v -> switchCameraMode());
+    }
+
+    private void hideSystemUI() {
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+
+            getWindow().getInsetsController().hide(
+                    WindowInsets.Type.statusBars() |
+                            WindowInsets.Type.navigationBars()
+            );
+
+            getWindow().getInsetsController().setSystemBarsBehavior(
+                    WindowInsetsController.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
+            );
+
+        } else {
+
+            getWindow().getDecorView().setSystemUiVisibility(
+                    View.SYSTEM_UI_FLAG_FULLSCREEN
+                            | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                            | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+            );
+        }
     }
 
     private boolean allPermissionsGranted() {
@@ -278,7 +303,8 @@ public class CameraActivity extends AppCompatActivity {
 
     private void startVideoRecording() {
 
-        if (videoCapture == null) return;
+        if (videoCapture == null)
+            return;
 
         isRecording = true;
         btnCapture.setImageResource(R.drawable.stop);
@@ -304,7 +330,8 @@ public class CameraActivity extends AppCompatActivity {
         }.start();
 
         handler.postDelayed(() -> {
-            if (isRecording) stopVideoRecording();
+            if (isRecording)
+                stopVideoRecording();
         }, 15000);
 
 
@@ -326,11 +353,22 @@ public class CameraActivity extends AppCompatActivity {
                 .start(ContextCompat.getMainExecutor(this), event -> {
 
                     if (event instanceof VideoRecordEvent.Finalize) {
-                        Uri savedUri = ((VideoRecordEvent.Finalize) event).getOutputResults().getOutputUri();
 
-                        Intent intent = new Intent(this, VideoPreviewActivity.class);
-                        intent.putExtra("video_uri", savedUri.toString());
-                        startActivity(intent);
+                        VideoRecordEvent.Finalize finalize = (VideoRecordEvent.Finalize) event;
+
+                        if (!finalize.hasError()) {
+
+                            Uri savedUri = finalize.getOutputResults().getOutputUri();
+
+                            Toast.makeText(CameraActivity.this, "Video Guardado", Toast.LENGTH_SHORT).show();
+
+                            Intent intent = new Intent(CameraActivity.this, PreviewActivity.class);
+                            intent.putExtra("video", savedUri.toString());
+                            startActivity(intent);
+
+                        } else {
+                            Toast.makeText(CameraActivity.this, "Error Video ", Toast.LENGTH_SHORT).show();
+                        }
                     }
                 });
     }

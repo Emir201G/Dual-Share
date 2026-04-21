@@ -6,21 +6,18 @@ import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.emir201.dualshare.R;
-import com.emir201.dualshare.adapter.CardStackAdapter;
 import com.emir201.dualshare.model.CardItem;
 import com.yuyakaido.android.cardstackview.CardStackLayoutManager;
-import com.yuyakaido.android.cardstackview.CardStackListener;
 import com.yuyakaido.android.cardstackview.CardStackView;
 import com.yuyakaido.android.cardstackview.Direction;
 import com.yuyakaido.android.cardstackview.Duration;
-import com.yuyakaido.android.cardstackview.StackFrom;
 import com.yuyakaido.android.cardstackview.SwipeAnimationSetting;
 
 import java.util.ArrayList;
@@ -32,8 +29,10 @@ public class HistoryFragment extends Fragment {
     private int delay = 4000;
     private Runnable autoSwipeRunnable;
     private CardStackLayoutManager layoutManager;
-    private CardStackView cardStackView;
+    private CardStackView cardStackViewHistory;
+    private LinearLayout layoutNoFriends, layoutNoStories;
     private Handler handler = new Handler(Looper.getMainLooper());
+
 
     @Nullable
     @Override
@@ -43,64 +42,10 @@ public class HistoryFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_history, container, false);
 
-        cardStackView = view.findViewById(R.id.cardStackView);
+        cardStackViewHistory = view.findViewById(R.id.cardStackViewHistory);
+        layoutNoFriends = view.findViewById(R.id.layoutNoFriends);
+        layoutNoStories = view.findViewById(R.id.layoutNoStories);
 
-        // ------------------ LISTENER CORRECTO ------------------
-        layoutManager = new CardStackLayoutManager(
-                requireContext(),
-                new CardStackListener() {
-
-                    @Override public void onCardDragging(Direction direction, float ratio) {}
-
-                    @Override
-                    public void onCardSwiped(Direction direction) {}
-
-                    @Override public void onCardRewound() {}
-
-                    @Override public void onCardCanceled() {}
-
-                    @Override
-                    public void onCardAppeared(View view, int position) {
-
-                        RecyclerView.ViewHolder holder =
-                                cardStackView.findViewHolderForAdapterPosition(position);
-
-                        if (holder instanceof CardStackAdapter.ImageViewHolder) {
-                            ((CardStackAdapter.ImageViewHolder) holder).startProgressBar(4000);
-                        }
-                    }
-
-                    @Override public void onCardDisappeared(View view, int position) {}
-                }
-        );
-
-        layoutManager.setStackFrom(StackFrom.Top);
-        layoutManager.setVisibleCount(2);
-        layoutManager.setTranslationInterval(8.0f);
-        layoutManager.setScaleInterval(0.95f);
-        layoutManager.setSwipeThreshold(0.3f);
-        layoutManager.setMaxDegree(20.0f);
-        layoutManager.setDirections(Direction.HORIZONTAL);
-        layoutManager.setCanScrollHorizontal(true);
-        layoutManager.setCanScrollVertical(true);
-
-        cardStackView.setLayoutManager(layoutManager);
-
-        // ------------------ DATA ------------------
-        String uriImage = "android.resource://" + requireActivity().getPackageName() + "/" + R.drawable.dog;
-        String uriVideo = "android.resource://" + requireActivity().getPackageName() + "/" + R.raw.basquet;
-
-        items.add(new CardItem(CardItem.Type.IMAGE, uriImage));
-        items.add(new CardItem(CardItem.Type.IMAGE, uriImage));
-        items.add(new CardItem(CardItem.Type.IMAGE, uriImage));
-        items.add(new CardItem(CardItem.Type.IMAGE, uriImage));
-        items.add(new CardItem(CardItem.Type.IMAGE, uriImage));
-        items.add(new CardItem(CardItem.Type.VIDEO, uriVideo));
-
-        CardStackAdapter adapter = new CardStackAdapter(items);
-        cardStackView.setAdapter(adapter);
-
-        startAutoSwipe();
 
         return view;
     }
@@ -120,12 +65,37 @@ public class HistoryFragment extends Fragment {
 
                 layoutManager.setSwipeAnimationSetting(setting);
 
-                cardStackView.swipe();
+                cardStackViewHistory.swipe();
 
                 handler.postDelayed(this, delay);
             }
         };
 
         handler.postDelayed(autoSwipeRunnable, delay);
+    }
+
+    // ------------------ SHOW CASE 1: NO FRIENDS ------------------
+    private void showCase1() {
+        layoutNoFriends.setVisibility(View.VISIBLE);
+        layoutNoStories.setVisibility(View.GONE);
+        cardStackViewHistory.setVisibility(View.GONE);
+    }
+
+    // ------------------ SHOW CASE 2: NO STORIES ------------------
+    private void showCase2() {
+        layoutNoFriends.setVisibility(View.GONE);
+        layoutNoStories.setVisibility(View.VISIBLE);
+        cardStackViewHistory.setVisibility(View.GONE);
+    }
+
+    // ------------------ SHOW CASE 3: STORY ------------------
+    private void showCase3() {
+        layoutNoFriends.setVisibility(View.GONE);
+        layoutNoStories.setVisibility(View.GONE);
+        cardStackViewHistory.setVisibility(View.VISIBLE);
+    }
+
+    private void setupCardStackView() {
+
     }
 }

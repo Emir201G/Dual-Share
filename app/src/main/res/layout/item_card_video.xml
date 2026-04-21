@@ -1,29 +1,27 @@
-<com.google.android.material.card.MaterialCardView xmlns:app="http://schemas.android.com/apk/res-auto"
+<com.google.android.material.card.MaterialCardView
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_margin="16dp"
-    android:layout_width="match_parent"
-    layout_height="match_parent"
-    layout_width="match_parent"
     app:cardCornerRadius="10dp"
     app:cardPreventCornerOverlap="true"
     app:cardUseCompatPadding="true">
 
-    <com.google.android.exoplayer2.ui.PlayerView
+    <androidx.media3.ui.PlayerView
         android:id="@+id/videoPlayer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_gravity="center"
-        app:show_buffering="never"
-        app:use_artwork="true"
         app:resize_mode="fill"
-        app:use_controller="false">
+        app:use_controller="false"
+        app:show_buffering="never">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:gravity="center">
+            android:gravity="center"
+            android:padding="8dp">
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:layout_width="40dp"
@@ -32,20 +30,21 @@
 
             <Space
                 android:layout_width="20dp"
-                android:layout_height="wrap_content"
-                />
+                android:layout_height="wrap_content"/>
 
             <ProgressBar
                 android:id="@+id/progressBar"
                 style="?android:attr/progressBarStyleHorizontal"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1" />
+                android:layout_weight="1"/>
+
             <Space
                 android:layout_width="20dp"
-                android:layout_height="wrap_content"
-                />
+                android:layout_height="wrap_content"/>
+
         </LinearLayout>
-    </com.google.android.exoplayer2.ui.PlayerView>
+
+    </androidx.media3.ui.PlayerView>
 
 </com.google.android.material.card.MaterialCardView>

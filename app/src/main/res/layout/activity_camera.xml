@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,113 +8,99 @@
     android:background="#000"
     tools:context=".CameraActivity">
 
-    <!-- Vista previa de la cámara -->
+
+    <!-- PREVIEW -->
     <androidx.camera.view.PreviewView
         android:id="@+id/previewView"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/controlPanel"
+        app:layout_constraintBottom_toTopOf="@id/captureContainer"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"/>
 
-    <!-- Botón de flash -->
+    <!-- FLASH -->
     <ImageButton
         android:id="@+id/btnFlash"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_margin="16dp"
+        android:layout_width="@dimen/icon_size"
+        android:layout_height="@dimen/icon_size"
+        android:layout_margin="@dimen/margin_standard"
         android:background="@android:color/transparent"
         android:scaleType="fitCenter"
-        app:tint="@color/white"
+        app:tint="@android:color/white"
         app:srcCompat="@drawable/flash"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"/>
 
-    <!-- CONTENEDOR DEL BOTÓN Y EL TEMPORIZADOR -->
-    <FrameLayout
-        android:id="@+id/recordContainer"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
+    <!-- PANEL BOTONES -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/captureContainer"
+        android:layout_width="0dp"
+        android:layout_height="110dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
-        <!-- TEMPORIZADOR CIRCULAR -->
-        <ProgressBar
-            android:id="@+id/progress_timer"
-            style="?android:attr/progressBarStyleHorizontal"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:indeterminate="false"
-            android:max="15000"
-            android:progress="0"
-            android:progressDrawable="@drawable/circle_progress" />
-
-        <!-- BOTÓN DE CAPTURA EN EL CENTRO -->
-        <ImageButton
-            android:id="@+id/btnCapture"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_gravity="center"
-            android:background="@drawable/bg_circle_button"
-            android:scaleType="fitCenter"
-            android:src="@drawable/photo"
-            app:tint="@android:color/white" />
-
-    </FrameLayout>
-
-    <!-- Panel inferior -->
-    <LinearLayout
-        android:id="@+id/controlPanel"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@android:color/transparent"
-        android:gravity="center"
-        android:orientation="horizontal"
-        android:padding="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
-
-        <Space
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content" />
-
+        <!-- BOTON VIDEO -->
         <ImageButton
             android:id="@+id/btnVideo"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="@dimen/icon_size"
+            android:layout_height="@dimen/icon_size"
             android:background="@drawable/bg_circle_button"
-            android:scaleType="fitCenter"
+            android:scaleType="centerInside"
             android:src="@drawable/video"
-            app:tint="@android:color/white" />
+            app:tint="@android:color/white"
+            app:layout_constraintEnd_toStartOf="@id/captureFrame"
+            app:layout_constraintTop_toTopOf="@id/captureFrame"
+            app:layout_constraintBottom_toBottomOf="@id/captureFrame"
+            android:layout_marginEnd="40dp"/>
 
-        <Space
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1" />
+        <!-- BOTON CENTRAL -->
+        <FrameLayout
+            android:id="@+id/captureFrame"
+            android:layout_width="@dimen/progress_size"
+            android:layout_height="@dimen/progress_size"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
 
-        <Space
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content" />
+            <ProgressBar
+                android:id="@+id/progress_timer"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:max="15000"
+                android:progress="0"
+                android:indeterminate="false"
+                android:progressDrawable="@drawable/circle_progress"/>
 
+            <ImageButton
+                android:id="@+id/btnCapture"
+                android:layout_width="@dimen/capture_button_size"
+                android:layout_height="@dimen/capture_button_size"
+                android:layout_gravity="center"
+                android:background="@drawable/bg_circle_button"
+                android:scaleType="centerInside"
+                android:src="@drawable/photo"
+                app:tint="@android:color/white"/>
+
+        </FrameLayout>
+
+        <!-- BOTON INVERTIR -->
         <ImageButton
             android:id="@+id/btnInverse"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="@dimen/icon_size"
+            android:layout_height="@dimen/icon_size"
             android:background="@drawable/bg_circle_button"
-            android:scaleType="fitCenter"
+            android:scaleType="centerInside"
             android:src="@drawable/inversa"
-            app:tint="@android:color/white" />
+            app:tint="@android:color/white"
+            app:layout_constraintStart_toEndOf="@id/captureFrame"
+            app:layout_constraintTop_toTopOf="@id/captureFrame"
+            app:layout_constraintBottom_toBottomOf="@id/captureFrame"
+            android:layout_marginStart="40dp"/>
 
-        <Space
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content" />
-
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

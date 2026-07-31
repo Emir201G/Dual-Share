@@ -19,7 +19,7 @@
         16dp
     </dimen>
     <dimen name="icon_size">
-        36dp
+        30dp
     </dimen>
 
     <dimen name="capture_button_size">

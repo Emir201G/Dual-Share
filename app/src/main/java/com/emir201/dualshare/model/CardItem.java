@@ -1,28 +1,20 @@
 package com.emir201.dualshare.model;
 
-import android.net.Uri;
+import com.emir201.dualshare.enums.Type;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class CardItem {
 
-    public enum Type {
-
-        IMAGE,
-        VIDEO
-    }
-
-    private Type type;
+    public  Type Type;
     private String uri;
 
-    public CardItem(Type type, String uri) {
-        this.type = type;
-        this.uri = uri;
-    }
-
-    public Type getType() {
-        return type;
-    }
-
-    public String getUri() {
-        return uri;
-    }
 }

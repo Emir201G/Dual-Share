@@ -31,8 +31,9 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+        sourceCompatibility = JavaVersion.VERSION_17
+
+        targetCompatibility = JavaVersion.VERSION_17
     }
 
     buildFeatures {
@@ -90,10 +91,18 @@ dependencies {
     implementation("com.google.firebase:firebase-auth")
     implementation("com.google.firebase:firebase-storage")
 
-    // Facebook Login
-    implementation("com.facebook.android:facebook-login:latest.release")
-
     // Google Sign-In
     implementation("com.google.android.gms:play-services-auth:20.7.0")
 
+    // Lombok para Android
+    compileOnly("org.projectlombok:lombok:1.18.30")
+    annotationProcessor("org.projectlombok:lombok:1.18.30")
+
+    // Retrofit
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+
+    //Room
+    implementation ("androidx.room:room-runtime:2.7.2")
+    annotationProcessor ("androidx.room:room-compiler:2.7.2")
 }
